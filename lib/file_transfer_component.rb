@@ -20,3 +20,5 @@ require 'file_transfer_component/handlers/commands'
 require 'file_transfer_component/handlers/initiated'
 
 
+require 'file_transfer_component/commands/command'
+require 'file_transfer_component/commands/initiate'

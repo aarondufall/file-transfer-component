@@ -1,3 +1,3 @@
 module FileTransfer
-  Client = FileTransferComponent
+  Client = FileTransferComponent::Commands
 end
