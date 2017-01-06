@@ -5,16 +5,18 @@ module FileTransferComponent
 
       initializer :file_id, :name, :uri
 
-      def self.build(file_id, name, uri, reply_stream_name: nil)
+      def self.build(name, uri, reply_stream_name: nil)
+        file_id = Identifier::UUID::Random.get
         instance = new(file_id, name, uri)
         instance.reply_stream_name = reply_stream_name
         instance.configure
         instance
       end
 
-      def self.call(file_id, name, uri, reply_stream_name: nil)
-        instance = build(file_id, name, uri, reply_stream_name: reply_stream_name)
+      def self.call(name, uri, reply_stream_name: nil)
+        instance = build(name, uri, reply_stream_name: reply_stream_name)
         instance.()
+        instance.file_id
       end
 
       def command

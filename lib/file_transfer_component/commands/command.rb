@@ -5,7 +5,6 @@ module FileTransferComponent
         cls.class_exec do
           include Messaging::StreamName
           include FileTransferComponent::Messages::Commands
-          include FileTransferComponent::Messages::Events
           include Telemetry::Logger::Dependency
 
           attr_accessor :reply_stream_name
