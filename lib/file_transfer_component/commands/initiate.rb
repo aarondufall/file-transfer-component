@@ -2,12 +2,12 @@ module FileTransferComponent
   module Commands
     class Initiate
       include Command
+      attr_writer :file_id
 
-      initializer :file_id, :name, :uri
+      initializer :name, :uri
 
       def self.build(name, uri, reply_stream_name: nil)
-        file_id = Identifier::UUID::Random.get
-        instance = new(file_id, name, uri)
+        instance = new(name, uri)
         instance.reply_stream_name = reply_stream_name
         instance.configure
         instance
@@ -16,7 +16,16 @@ module FileTransferComponent
       def self.call(name, uri, reply_stream_name: nil)
         instance = build(name, uri, reply_stream_name: reply_stream_name)
         instance.()
-        instance.file_id
+      end
+
+      def file_id
+        @file_id ||= Identifier::UUID::Random.get
+      end
+
+      def call
+        stream_name = command_stream_name(file_id)
+        write.(command, stream_name, reply_stream_name: reply_stream_name)
+        file_id
       end
 
       def command
