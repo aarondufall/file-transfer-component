@@ -25,8 +25,7 @@ module FileTransferComponent
       end
 
       def call
-        stream_name = command_stream_name(file_id)
-        write.(command, stream_name, reply_stream_name: reply_stream_name)
+        write_command
         file_id
       end
 

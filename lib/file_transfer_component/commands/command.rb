@@ -23,6 +23,10 @@ module FileTransferComponent
       end
 
       def call
+        write_command
+      end
+
+      def write_command
         stream_name = command_stream_name(file_id)
         write.(command, stream_name, reply_stream_name: reply_stream_name)
       end
