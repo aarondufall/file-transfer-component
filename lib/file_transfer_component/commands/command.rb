@@ -11,6 +11,7 @@ module FileTransferComponent
 
           dependency :write, Messaging::Postgres::Write
           dependency :clock, Clock::UTC
+          dependency :identifier, Identifier::UUID::Random
 
           category :file_transfer
           abstract :command
@@ -20,6 +21,7 @@ module FileTransferComponent
       def configure
         Messaging::Postgres::Write.configure self
         Clock::UTC.configure self
+        Identifier::UUID::Random.configure self
       end
 
       def call

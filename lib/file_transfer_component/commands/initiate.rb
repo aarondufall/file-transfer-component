@@ -6,8 +6,6 @@ module FileTransferComponent
 
       initializer :name, :uri
 
-      dependency :identifier, Identifier::UUID::Random
-
       def self.build(name, uri, reply_stream_name: nil)
         instance = new(name, uri)
         instance.reply_stream_name = reply_stream_name

@@ -1,18 +1,16 @@
 module FileTransferComponent
   module FileStorage
     class Temporary
-      #TODO make file storage namespace and rename to temp
-
-      def configure(receiver)
-        receiver.file_system = new
+      def self.configure(receiver)
+        receiver.temporary_storage = new
       end
 
       def exist?(uri)
-        File.exist?(uri)
+        ::File.exist?(uri)
       end
 
       def size?(uri, size_bytes)
-        File.size(uri) == size_bytes
+        ::File.size(uri) == size_bytes
       end
 
       class Substitute

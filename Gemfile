@@ -17,6 +17,7 @@ source 'https://rubygems.org' do
   gem 'thor'
   gem 'thread_safe'
   gem 'tzinfo'
+  gem 'aws-sdk'
 end
 
 source 'https://gem.fury.io/eventide/' do

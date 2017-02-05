@@ -5,16 +5,27 @@ module FileTransferComponent
 
     entity_name :file
 
-    # apply AccountOpened do |account_opened|
-    #   SetAttributes.(account, account_opened, copy: [
-    #     { account_id: :id },
-    #     :customer_id,
-    #     :sequence
-    #   ])
+    apply Initiated do |initiated|
+        SetAttributes.(file, initiated, copy: [
+            {file_id: :id},
+            :name,
+        ])
 
-    #   account.opened_time = Time.parse(account_opened.time)
-    # end
+        file.initiated_time = Time.parse(initiated.processed_time)
+    end
 
+    apply CopiedToS3 do |initiated|
+        SetAttributes.(file, initiated, copy: [
+            :key,
+            :bucket,
+            :region
+        ])
 
+        file.permanent_storage_time = Time.parse(initiated.processed_time)
+    end
+
+    apply NotFound do |not_found|
+        file.not_found_time = Time.parse(not_found.processed_time)
+    end
   end
 end
