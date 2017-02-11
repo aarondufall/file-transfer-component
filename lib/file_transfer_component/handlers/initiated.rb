@@ -3,7 +3,7 @@ module FileTransferComponent
     class Events
       class Initiated
         include Messaging::Handle
-        include Messaging::StreamName
+        include Messaging::Postgres::StreamName
         include FileTransferComponent::Messages::Commands
         include FileTransferComponent::Messages::Events
         include Log::Dependency
@@ -44,6 +44,7 @@ module FileTransferComponent
             return 
           end
 
+          #TODO handle on upload failure
           unless temporary_storage.exist?(initiated.uri)
             time = clock.iso8601
             file_missing = NotFound.follow(initiated)
@@ -54,9 +55,11 @@ module FileTransferComponent
             return
           end
 
-          # TODO derive from setting default to AWS montreal
+          # TODO setting file
+          # check account example for setting class
           region = 'ca-central-1'
           bucket = 'eventide'
+          
           key = "#{file.id}-#{initiated.name}"
 
           unless permanent_storage.save(initiated.uri, region, bucket, key)

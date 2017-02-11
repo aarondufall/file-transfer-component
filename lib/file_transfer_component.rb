@@ -11,6 +11,7 @@ require 'file_transfer_component/messages/events/copied_to_s3'
 require 'file_transfer_component/messages/events/not_found'
 
 require 'file_transfer_component/file'
+require 'file_transfer_component/settings'
 
 require 'file_transfer_component/file_storage/permanent'
 require 'file_transfer_component/file_storage/temporary'

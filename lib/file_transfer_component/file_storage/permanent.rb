@@ -2,29 +2,30 @@ module FileTransferComponent
   module FileStorage
     class Permanent
 
-      def self.configure(receiver)
-        receiver.permanent_storage = new
+      configure :permanent_storage
+
+      setting :access_key_id
+      setting :secret_access_key 
+
+      def self.build(settings: nil)
+        settings ||= Settings.instance
+        instance = new
+        settings.set(instance)
+        instance
       end
 
+
       def save(uri, region, bucket, key)
-        Aws.config.update({
-          region: 'ca-central-1',
-          credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
-        })
-
-
-        s3 = Aws::S3::Resource.new(region: region)
-    
-        obj = s3.bucket(bucket).object(key)
+        s3 = Aws::S3::Resource.new(region: region, credentials: credentials)
+        
+        bucket = s3.bucket(bucket)
+        obj = bucket.object(key)
 
         obj.upload_file(uri)
       end
 
-      class Substitute
-        attr_writer :saved
-        def save(uri, region, bucket, key)
-          @saved ||= nil
-        end
+      def credentials
+        @credentials ||= Aws::Credentials.new(access_key_id, secret_access_key)
       end
     end
   end

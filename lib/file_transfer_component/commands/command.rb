@@ -3,9 +3,9 @@ module FileTransferComponent
     module Command
       def self.included(cls)
         cls.class_exec do
-          include Messaging::StreamName
+          include Messaging::Postgres::StreamName
           include FileTransferComponent::Messages::Commands
-          include Telemetry::Logger::Dependency
+          include Log::Dependency
 
           attr_accessor :reply_stream_name
 
