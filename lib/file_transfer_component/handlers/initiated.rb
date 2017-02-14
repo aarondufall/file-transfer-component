@@ -8,18 +8,20 @@ module FileTransferComponent
         include FileTransferComponent::Messages::Events
         include Log::Dependency
 
+        setting :region
+        setting :bucket
+
         dependency :write, Messaging::Postgres::Write
         dependency :store, FileTransferComponent::Store
         dependency :clock, Clock::UTC
-        dependency :permanent_storage, FileTransferComponent::FileStorage::Permanent # ::S3
-        dependency :temporary_storage, FileTransferComponent::FileStorage::Temporary
+        dependency :remote_storage, FileTransferComponent::FileStorage::Remote # ::S3
 
         def configure
           Messaging::Postgres::Write.configure self
           FileTransferComponent::Store.configure self
-          FileTransferComponent::FileStorage::Permanent.configure self
-          FileTransferComponent::FileStorage::Temporary.configure self
+          FileTransferComponent::FileStorage::Remote.configure self
           Clock::UTC.configure self
+          Settings.instance.set self
         end
 
         category :file_transfer
@@ -43,9 +45,12 @@ module FileTransferComponent
             logger.debug "#{initiated} command was ignored. File transfer #{file_id} can not be found."
             return 
           end
+      
+          key = "#{file.id}-#{initiated.name}"
 
-          #TODO handle on upload failure
-          unless temporary_storage.exist?(initiated.uri)
+          begin
+            remote_storage.put(initiated.uri, region, bucket, key)
+          rescue FileTransferComponent::FileStorage::Remote::LocalFileNotFound
             time = clock.iso8601
             file_missing = NotFound.follow(initiated)
             file_missing.processed_time = time
@@ -54,23 +59,7 @@ module FileTransferComponent
             write.(file_missing, stream_name, expected_version: stream_version)
             return
           end
-
-          # TODO setting file
-          # check account example for setting class
-          region = 'ca-central-1'
-          bucket = 'eventide'
-          
-          key = "#{file.id}-#{initiated.name}"
-
-          unless permanent_storage.save(initiated.uri, region, bucket, key)
-            # investigate retry lib or write your own HA!
-            # https://github.com/ooyala/retries
-            # could be placed in permant storage class
-            # or use error telemetry
-            # write CopyToS3Failed
-            return
-          end
-
+          pp "+++++++++++++++++++++++++++++++++++"
           time = clock.iso8601
 
           copied = CopiedToS3.follow(initiated, include: [:file_id])

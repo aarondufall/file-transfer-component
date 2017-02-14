@@ -13,8 +13,7 @@ require 'file_transfer_component/messages/events/not_found'
 require 'file_transfer_component/file'
 require 'file_transfer_component/settings'
 
-require 'file_transfer_component/file_storage/permanent'
-require 'file_transfer_component/file_storage/temporary'
+require 'file_transfer_component/file_storage/remote'
 
 require 'file_transfer_component/projection'
 require 'file_transfer_component/store'

@@ -8,13 +8,11 @@ context "Handle Events" do
       entity: Controls::File::Initiated.example
     )
 
-    temporary_storage = FileTransferComponent::FileStorage::Temporary::Substitute.new
-    temporary_storage.exists = true
-    fixture.handler.temporary_storage = temporary_storage
+    #TODO find out how to configure this correctly
+    FileTransferComponent::Settings.instance.set fixture.handler
 
-    permanent_storage = FileTransferComponent::FileStorage::Permanent::Substitute.new
-    permanent_storage.saved = true
-    fixture.handler.permanent_storage = permanent_storage
+    remote_storage = FileTransferComponent::FileStorage::Remote::Substitute.new
+    fixture.handler.remote_storage = remote_storage
 
     fixture.(output: "CopiedToS3") do |test|
 

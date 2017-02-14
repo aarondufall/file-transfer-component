@@ -8,13 +8,13 @@ context "Handle Events" do
       entity: Controls::File::Initiated.example
     )
 
-    temporary_storage = FileTransferComponent::FileStorage::Temporary::Substitute.new
-    temporary_storage.exists = false
-    fixture.handler.temporary_storage = temporary_storage
+    #TODO make substitute and remove setting
+    FileTransferComponent::Settings.instance.set fixture.handler
 
-    permanent_storage = FileTransferComponent::FileStorage::Permanent::Substitute.new
-    permanent_storage.saved = true
-    fixture.handler.permanent_storage = permanent_storage
+    remote_storage = FileTransferComponent::FileStorage::Remote.new
+
+
+    fixture.handler.remote_storage = remote_storage
 
     fixture.(output: "NotFound") do |test|
 
