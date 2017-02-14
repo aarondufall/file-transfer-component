@@ -2,7 +2,7 @@ module FileTransferComponent
   module FileStorage
     class Remote
 
-      configure :permanent_storage
+      configure :remote_storage
 
       setting :access_key_id
       setting :secret_access_key 
@@ -37,7 +37,10 @@ module FileTransferComponent
       LocalFileNotFound = Class.new(StandardError)
 
       class Substitute
+        attr_accessor :not_found
+
         def put(*args)
+          raise LocalFileNotFound if not_found
         end
       end
     end

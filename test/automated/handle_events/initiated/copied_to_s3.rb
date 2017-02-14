@@ -2,17 +2,17 @@ require_relative '../../automated_init'
 
 context "Handle Events" do
   context "Accept event" do
+    handler = Handlers::Events::Initiated.build
+    SubstAttr::Substitute.(:write, handler)
+    SubstAttr::Substitute.(:store, handler)
+    SubstAttr::Substitute.(:clock, handler)
+    SubstAttr::Substitute.(:remote_storage, handler)
+
     fixture = Fixtures::Handler.build(
-      handler: Handlers::Events::Initiated.new,
+      handler: handler,
       input_message: Controls::Events::Initiated.example,
       entity: Controls::File::Initiated.example
     )
-
-    #TODO find out how to configure this correctly
-    FileTransferComponent::Settings.instance.set fixture.handler
-
-    remote_storage = FileTransferComponent::FileStorage::Remote::Substitute.new
-    fixture.handler.remote_storage = remote_storage
 
     fixture.(output: "CopiedToS3") do |test|
 

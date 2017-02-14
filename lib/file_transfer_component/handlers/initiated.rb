@@ -59,7 +59,7 @@ module FileTransferComponent
             write.(file_missing, stream_name, expected_version: stream_version)
             return
           end
-          pp "+++++++++++++++++++++++++++++++++++"
+
           time = clock.iso8601
 
           copied = CopiedToS3.follow(initiated, include: [:file_id])

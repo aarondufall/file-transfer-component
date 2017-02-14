@@ -2,17 +2,20 @@ require_relative '../../automated_init'
 
 context "Handle Events" do
   context "File Not Found" do
+    handler = Handlers::Events::Initiated.build
+    SubstAttr::Substitute.(:write, handler)
+    SubstAttr::Substitute.(:store, handler)
+    SubstAttr::Substitute.(:clock, handler)
+
     fixture = Fixtures::Handler.build(
-      handler: Handlers::Events::Initiated.new,
+      handler: handler,
       input_message: Controls::Events::Initiated.example,
       entity: Controls::File::Initiated.example
     )
 
-    #TODO make substitute and remove setting
-    FileTransferComponent::Settings.instance.set fixture.handler
 
-    remote_storage = FileTransferComponent::FileStorage::Remote.new
-
+    remote_storage = FileTransferComponent::FileStorage::Remote::Substitute.new
+    remote_storage.not_found = true;
 
     fixture.handler.remote_storage = remote_storage
 
