@@ -3,6 +3,5 @@ module FileTransfer
 
   module Client
     Messages = FileTransferComponent::Messages
-    Controls = FileTransferComponent::Controls
   end
 end
