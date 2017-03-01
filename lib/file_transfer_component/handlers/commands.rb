@@ -2,7 +2,7 @@ module FileTransferComponent
   module Handlers
     class Commands
       include Messaging::Handle
-      include Messaging::StreamName
+      include Messaging::Postgres::StreamName
       include FileTransferComponent::Messages::Commands
       include FileTransferComponent::Messages::Events
       include Log::Dependency

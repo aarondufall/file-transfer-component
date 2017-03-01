@@ -1,165 +1,124 @@
 GEM
   remote: https://rubygems.org/
-  remote: https://gem.fury.io/eventide/
   specs:
-    async_invocation (0.1.0.1)
-    attribute (0.1.3.1)
-    casing (0.2.0.0)
-    clock (0.4.0.2)
-      naught
-      tzinfo
-    collection (0.4.1.1)
-    configure (0.1.2.0)
+    aws-sdk (2.7.7)
+      aws-sdk-resources (= 2.7.7)
+    aws-sdk-core (2.7.7)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.7.7)
+      aws-sdk-core (= 2.7.7)
+    aws-sigv4 (1.0.0)
+    coderay (1.1.1)
     confstruct (1.0.2)
       hashie (~> 3.3)
-    cycle (0.2.0.0)
-      clock
-      initializer
-      log
-      telemetry
-    dependency (0.1.0.0)
-      subst_attr
-    entity_cache (0.11.1.0)
-      clock
-      configure
-      identifier-uuid
-      log
-      settings
-      telemetry
-      virtual
-    entity_projection (0.1.0.1)
-      messaging
-    entity_store (0.3.2.0)
-      entity_cache
-      entity_projection
-    event_source (0.16.0.0)
-      async_invocation
-      casing
-      cycle
-      identifier-uuid
-      initializer
-      schema
-      transform
-      virtual
-    event_source-postgres (0.10.0.0)
-      cycle
-      event_source
-      log
+    eventide-postgres (0.1.1.0)
+      evt-entity_snapshot-postgres
+      evt-entity_store
+      evt-messaging-postgres
+    evt-async_invocation (0.1.0.2)
+    evt-attribute (0.1.3.2)
+    evt-casing (0.2.0.1)
+    evt-clock (0.4.0.3)
+      naught
+      tzinfo
+    evt-configure (0.1.2.2)
+    evt-cycle (0.3.0.0)
+      evt-clock
+      evt-initializer
+      evt-log
+      evt-telemetry
+    evt-dependency (0.1.0.1)
+      evt-subst_attr
+    evt-entity_cache (0.11.1.1)
+      evt-clock
+      evt-configure
+      evt-identifier-uuid
+      evt-log
+      evt-settings
+      evt-telemetry
+      evt-virtual
+    evt-entity_projection (0.1.0.3)
+      evt-messaging
+    evt-entity_snapshot-postgres (0.1.0.1)
+      evt-entity_store
+      evt-messaging-postgres
+    evt-entity_store (0.3.3.0)
+      evt-entity_cache
+      evt-entity_projection
+    evt-event_source (0.24.0.0)
+      evt-async_invocation
+      evt-casing
+      evt-identifier-uuid
+      evt-initializer
+      evt-schema
+      evt-transform
+      evt-virtual
+    evt-event_source-postgres (0.15.1.0)
+      evt-cycle
+      evt-event_source
+      evt-log
+      evt-settings
       pg
-      settings
-    eventide-postgres (0.1.0.0)
-      entity_store
-      messaging-postgres
-    hashie (3.4.6)
-    identifier-uuid (0.1.1.1)
+    evt-identifier-uuid (0.1.1.2)
       naught
-    initializer (0.1.0.0)
-      attribute
-    io-console (0.4.5)
-    json (2.0.2)
-    log (0.4.3.2)
-      clock
-      dependency
-      initializer
-      rainbow
-      telemetry
-    messaging (0.7.1.0)
-      event_source
-    messaging-postgres (0.4.0.0)
-      event_source-postgres
-      messaging
-    minitest (5.10.1)
-    naught (1.1.0)
-    net-telnet (0.1.1)
-    pg (0.19.0)
-    power_assert (0.4.1)
-    psych (2.2.2)
-    rainbow (2.2.1)
-    rake (12.0.0)
-    rdoc (5.0.0)
-    schema (0.6.0.2)
-      attribute
-      set_attributes
-      validate
-      virtual
-    set_attributes (0.1.1.1)
-      telemetry-logger
-    settings (0.2.0.3)
-      casing
+    evt-initializer (0.1.0.1)
+      evt-attribute
+    evt-log (0.4.3.4)
+      evt-clock
+      evt-dependency
+      evt-initializer
+      evt-telemetry
+      terminal_colors
+    evt-messaging (0.12.1.0)
+      evt-event_source
+    evt-messaging-postgres (0.6.0.0)
+      evt-event_source-postgres
+      evt-messaging
+    evt-schema (0.6.1.0)
+      evt-attribute
+      evt-set_attributes
+      evt-validate
+      evt-virtual
+    evt-set_attributes (0.3.0.1)
+    evt-settings (0.2.0.4)
       confstruct
-      log
-    subst_attr (0.1.0.0)
-      attribute
+      evt-casing
+      evt-log
+    evt-subst_attr (0.1.0.1)
+      evt-attribute
       naught
-    telemetry (0.3.0.0)
-      clock
-      dependency
-    telemetry-logger (0.5.1.2)
-      clock
-      dependency
-      rainbow
-    test-unit (3.2.3)
-      power_assert
+    evt-telemetry (0.3.0.1)
+      evt-clock
+      evt-dependency
+    evt-transform (0.1.1.4)
+      evt-log
+    evt-validate (0.3.1.4)
+    evt-virtual (0.1.0.1)
+    hashie (3.5.3)
+    jmespath (1.3.1)
+    method_source (0.8.2)
+    naught (1.1.0)
+    pg (0.19.0)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    slop (3.6.0)
+    terminal_colors (0.0.0)
     test_bench (1.3.2)
-    thor (0.19.4)
     thread_safe (0.3.5)
-    transform (0.1.1.3)
-      log
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    validate (0.3.1.3)
-    virtual (0.1.0.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  async_invocation!
-  attribute!
-  casing!
-  clock!
-  collection!
-  configure!
-  confstruct!
-  cycle!
-  dependency!
-  entity_cache!
-  entity_projection!
-  entity_store!
-  event_source!
-  event_source-postgres!
-  eventide-postgres!
-  hashie!
-  identifier-uuid!
-  initializer!
-  io-console (= 0.4.5)!
-  json!
-  log!
-  messaging!
-  messaging-postgres!
-  minitest!
-  naught!
-  net-telnet!
-  pg!
-  power_assert!
-  psych!
-  rainbow!
-  rake!
-  rdoc!
-  schema!
-  set_attributes!
-  settings!
-  subst_attr!
-  telemetry!
-  telemetry-logger!
-  test-unit!
-  test_bench!
-  thor!
-  thread_safe!
-  transform!
-  tzinfo!
-  validate!
-  virtual!
+  aws-sdk
+  eventide-postgres
+  pry
+  test_bench
 
 BUNDLED WITH
    1.13.7
