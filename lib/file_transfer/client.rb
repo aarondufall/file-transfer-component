@@ -1,3 +1,5 @@
+require 'eventide/postgres'
+
 require 'file_transfer_component/messages/events/not_found'
 require 'file_transfer_component/messages/events/copied_to_s3'
 require 'file_transfer_component/messages/events/initiated'
