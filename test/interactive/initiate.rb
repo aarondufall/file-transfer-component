@@ -1,4 +1,5 @@
 require_relative '../client_test_init'
+require_relative '../test_init'
 
 name = ENV['NAME']
 uri = ENV['URI']

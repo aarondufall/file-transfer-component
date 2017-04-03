@@ -1,7 +1,7 @@
 module FileTransferComponent
   module Consumers
     class Event
-      include Consumer
+      include Consumer::Postgres
 
       # Specifies handler implementations for handling messages
       handler Handlers::Events::Initiated
