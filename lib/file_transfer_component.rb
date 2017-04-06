@@ -2,6 +2,8 @@
 require 'pp'
 
 require 'eventide/postgres'
+require 'consumer/postgres'
+require 'component_host'
 require 'aws-sdk'
 
 require 'file_transfer_component/messages/commands/initiate'
@@ -24,3 +26,7 @@ require 'file_transfer_component/handlers/initiated'
 
 require 'file_transfer_component/commands/command'
 require 'file_transfer_component/commands/initiate'
+
+require 'file_transfer_component/consumers/command'
+require 'file_transfer_component/consumers/event'
+require 'file_transfer_component/start'

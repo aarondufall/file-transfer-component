@@ -6,15 +6,16 @@ module FileTransferComponent
 
       initializer :name, :uri
 
-      def self.build(name, uri, reply_stream_name: nil)
+      def self.build(name, uri, file_id: nil, reply_stream_name: nil)
         instance = new(name, uri)
+        instance.file_id = file_id
         instance.reply_stream_name = reply_stream_name
         instance.configure
         instance
       end
 
-      def self.call(name, uri, reply_stream_name: nil)
-        instance = build(name, uri, reply_stream_name: reply_stream_name)
+      def self.call(name, uri, file_id: nil, reply_stream_name: nil)
+        instance = build(name, uri, file_id: file_id, reply_stream_name: reply_stream_name)
         instance.()
       end
 
@@ -29,8 +30,8 @@ module FileTransferComponent
 
       def command
         Messages::Commands::Initiate.build(
-          file_id: file_id, 
-          name: name, 
+          file_id: file_id,
+          name: name,
           uri: uri,
           time: clock.iso8601
         )
