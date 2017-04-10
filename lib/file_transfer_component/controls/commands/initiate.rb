@@ -7,8 +7,8 @@ module FileTransferComponent
           initiate = FileTransferComponent::Messages::Commands::Initiate.build
 
           initiate.file_id = ID.example
-          initiate.name = "some_name"
-          initiate.uri = "some_uri"
+          initiate.name = name
+          initiate.uri = uri
           initiate.time = Controls::Time.example
 
           initiate
@@ -18,6 +18,14 @@ module FileTransferComponent
           data = example.attributes
           data.delete(:time)
           data
+        end
+
+        def self.uri
+          "some_uri"
+        end
+
+        def self.name
+          "some_name"
         end
       end
     end

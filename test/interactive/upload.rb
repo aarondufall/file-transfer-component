@@ -15,22 +15,4 @@ end
 
 file_id = Client::Initiate.(name, uri)
 
-command_handler = FileTransferComponent::Handlers::Commands.build
-event_handler = FileTransferComponent::Handlers::Events::Initiated.build
-
-puts "reading command"
-EventSource::Postgres::Read.("fileTransfer:command") do |event_data|
-  command_handler.(event_data)
-end
-
-puts "reading events"
-EventSource::Postgres::Read.("fileTransfer") do |event_data|
-  event_handler.(event_data)
-end
-
-store = FileTransferComponent::Store.build
-
-file = store.get(file_id)
-
-pp file
 
