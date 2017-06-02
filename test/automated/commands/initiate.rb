@@ -36,7 +36,7 @@ context "Commands" do
       end
 
       test "Stream Name [#{stream_name}]" do
-        assert(stream_name == Messaging::Postgres::StreamName.command_stream_name(file_id, category))
+        assert(stream_name == Messaging::StreamName.command_stream_name(file_id, category))
       end
 
       test "Reply Stream Name [#{reply_stream_name}]" do

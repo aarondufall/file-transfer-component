@@ -7,5 +7,4 @@ gem 'evt-component_host'
 gem 'test_bench'
 gem 'pry'
 
-
 gem 'aws-sdk'

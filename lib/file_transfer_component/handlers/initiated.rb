@@ -3,7 +3,7 @@ module FileTransferComponent
     class Events
       class Initiated
         include Messaging::Handle
-        include Messaging::Postgres::StreamName
+        include Messaging::StreamName
         include FileTransferComponent::Messages::Commands
         include FileTransferComponent::Messages::Events
         include Log::Dependency
@@ -47,7 +47,7 @@ module FileTransferComponent
           end
       
           key = "#{file.id}-#{initiated.name}"
-
+          
           begin
             remote_storage.put(initiated.uri, region, bucket, key)
           rescue FileTransferComponent::FileStorage::Remote::LocalFileNotFound
